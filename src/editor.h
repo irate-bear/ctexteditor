@@ -16,6 +16,8 @@ typedef struct {
 Editor* edNew();
 Editor* edNewStr(const char* filename);
 
+void edDestroy(Editor *editor);
+
 char* ctos(Editor *editor, int n);
 void edUpdateWindow(Editor *editor);
 void edSaveFile(Editor *editor);

@@ -6,7 +6,7 @@ OBJ=obj
 SRCS=$(wildcard $(SRC)/*.c)
 OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 
-OUT=bin/ctexteditor
+OUT=bin/cte
 
 all: $(OUT)
 

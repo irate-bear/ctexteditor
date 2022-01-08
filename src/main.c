@@ -31,7 +31,8 @@ int main(int argc, char const *argv[])
         edPrintBuff(editor);
         edHandleInput(editor, wgetch(editor->pad));
         edPrintBuff(editor);
-    }   
+    }  
+    edDestroy(editor); 
     endwin();
     exit(EXIT_SUCCESS);
 }

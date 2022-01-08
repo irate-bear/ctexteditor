@@ -86,6 +86,12 @@ Editor* edNewStr(const char* filename) {
     return editor;
 }
 
+void edDestroy(Editor *editor) {
+    delwin(editor->pad);
+    delwin(editor->padstatus);
+    bufDestroy(editor->buff);
+}
+
 void edSaveFile(Editor *editor) {
     FILE *fp = fopen(editor->filename, "w");
 
@@ -242,8 +248,9 @@ void edPrintStatusLine(Editor* editor) {
     mvwprintw(editor->padstatus, 0, 0, editor->status);
     wclrtoeol(editor->padstatus);
     
-    int len = snprintf(NULL, 0, "COL: %s  ROW: %s",  ctos(editor, editor->x), ctos(editor, editor->y));
-    mvwprintw(editor->padstatus, 0, editor->cols - len , "COL: %s  ROW: %s",  ctos(editor, editor->x), ctos(editor, editor->y));
+    char *row = ctos(editor, editor->y), *col = ctos(editor, editor->x);
+    int len = snprintf(NULL, 0, "COL: %s  ROW: %s",  col, row);
+    mvwprintw(editor->padstatus, 0, editor->cols - len , "COL: %s  ROW: %s",  col, row);
     wclrtoeol(editor->padstatus);
     
     wattroff(editor->padstatus, A_REVERSE);
